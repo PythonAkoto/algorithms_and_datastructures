@@ -49,7 +49,7 @@ Now we create the empy hashmaps, which will count
 how many times each letter appears in the string.
 */
 const countS = {};
-const contT = {};
+const countT = {};
 
 // loop through strings, adding them to their hashmap
 for (let i = 0; i < s.length; i++) {

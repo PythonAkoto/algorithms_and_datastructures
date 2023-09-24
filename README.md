@@ -1,2 +1,2 @@
-# algorithms_and_datastructures
-Repo expanding on algorithms and data structures using Python &amp; JavaScript
+# Algorithms and Datastructures
+Repo expanding on algorithms and data structures from Leetcode, using Python &amp; JavaScript.

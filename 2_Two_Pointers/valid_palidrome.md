@@ -89,4 +89,36 @@ for (let i = 0; i < s.length; i++) {
 
 // reverse the letters to see if palindrome
 return newStr === newStr.split('').reverse().join('');
+
+const palindromeString = isPalindrome('race a car');
+console.log(palindromeString);
+```
+
+# JavaScript Solution 2
+```
+var isPalindrome = function(s) {
+    // Convert the string to lowercase and remove non-alphanumeric characters
+    const cleanString = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+    // Create left and right pointers
+    let leftPointer = 0;
+    let rightPointer = cleanString.length - 1;
+    
+    // Check if each pointer has a valid alphanumeric
+    // If not, move the pointer (forward or backwards) by 1
+    while (leftPointer < rightPointer) {
+        // Compare the alphanumeric values in each pointer
+        if (cleanString[leftPointer] !== cleanString[rightPointer]) {
+            return false;
+        }
+        
+        // Move each pointer to the next character in the cleaned string
+        leftPointer += 1;
+        rightPointer -= 1;
+    }
+    return true;
+};
+
+const x = isPalindrome('A man, a plan, a canal: Panama');
+console.log(x);
 ```

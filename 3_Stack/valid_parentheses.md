@@ -37,7 +37,7 @@ for c in s:
         stack.append(c)    # add to stack
         continue
     
-    # if NOT in stack AND NOT closing parentheses 
+    # if NOT in stack OR NOT closing parentheses 
     if not stack or stack[-1] != Map[c]:
         return False
     
@@ -51,4 +51,34 @@ return not stack
 
 # JavaScript
 ```
+var isValid = function(s) {
+    // create hashmap
+    const hashmap = {'}':'{', ']':'[', ')':'('};
+    // create stack
+    let stack = [];
+    
+    // check if char is in hashmap
+    for (let index = 0; index < s.length; index++) {
+        let char = s[index];
+        
+        // check if NOT closing paretheses
+        if (!(char in hashmap)) {
+            stack.push(char);
+            continue;
+        }
+        
+        // if NOT in stack OR NOT closing parethesis
+        if (stack.length === 0 || stack[stack.length- 1] !== hashmap[char]) {
+            return false;
+        }
+        
+        // if the above positions are not met then we have a match!
+        stack.pop();
+    }
+    // returns true is the stack is empty
+    return stack.length === 0;
+};
+
+let s = '()[]{}';
+console.log(isValid(s))
 ```

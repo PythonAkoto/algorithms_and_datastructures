@@ -71,4 +71,43 @@ return res
 
 # JavaScript
 ```
+var threeSum = function(nums) {
+    // create empty list
+    let results = [];
+    nums.sort((a, b) => a - b);  // Proper sorting function to sort in ascending order
+
+    for (let index = 0; index < nums.length - 2; index++) {
+        const a = nums[index];
+
+        if (a > 0) {
+            break;
+        }
+
+        if (index > 0 && a === nums[index - 1]) {
+            continue;
+        }
+
+        // create pointers
+        let left = index + 1, right = nums.length - 1;
+
+        while (left < right) {
+            // the 3 sum caluclation
+            const sum = a + nums[left] + nums[right];
+
+            if (sum === 0) {
+                results.push([a, nums[left], nums[right]]);
+                while (nums[left] === nums[left + 1]) left++;  // Skip duplicates
+                while (nums[right] === nums[right - 1]) right--;  // Skip duplicates
+                left++;
+                right--;
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+
+    return results;
+};
 ```

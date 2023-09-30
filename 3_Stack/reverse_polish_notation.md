@@ -32,12 +32,12 @@ Example 3:
 Input: `tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]`
 Output: `22`
 *Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5*
-*= ((10 * (6 / (12 * -11))) + 17) + 5*
-*= ((10 * (6 / -132)) + 17) + 5*
-*= ((10 * 0) + 17) + 5*
-*= (0 + 17) + 5*
-*= 17 + 5*
-*= 22*
+  *= ((10 * (6 / (12 * -11))) + 17) + 5*
+  *= ((10 * (6 / -132)) + 17) + 5*
+  *= ((10 * 0) + 17) + 5*
+  *= (0 + 17) + 5*
+  *= 17 + 5*
+  *= 22*
 
 # Python
 ```
@@ -71,4 +71,35 @@ class Solution:
 
 # JavaScript
 ```
+var evalRPN = function(tokens) {
+    // create stack
+    let stack = [];
+    for (i = 0; i < tokens.length; i++) {
+        char = tokens[i];
+        if (char === '+') {
+            // pop twice & add values
+            stack.push(stack.pop() + stack.pop());
+        } else if (char === '-') {
+            // pop twice and subtract values
+            let a = stack.pop(), b = stack.pop();
+            stack.push(b - a);
+        } else if (char === '*') {
+            // pop twice then multiply values
+            stack.push(stack.pop() * stack.pop());
+        } else if (char === '/') {
+            // pop twice then divide values
+            let a = stack.pop(), b = stack.pop();
+            let result = b / a;
+            stack.push(result >= 0 ? Math.floor(result) : Math.ceil(result));
+        } else {
+            stack.push(Number(char));
+        }
+    }
+    return stack[0];
+};
+
+let t = ["4","13","5","/","+"];
+let t2 = ["4","-2","/","2","-3","-","-"];
+console.log(evalRPN(t));
+console.log(evalRPN(t2));  // -7
 ```

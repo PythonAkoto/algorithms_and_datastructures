@@ -15,9 +15,9 @@ Example 1:
 
 Example 2:
 
-Input: `nums = [-1,0,3,5,9,12], target = 2`
-Output: `-1`
-*Explanation: 2 does not exist in nums so return -1*
+  Input: `nums = [-1,0,3,5,9,12], target = 2`
+  Output: `-1`
+  *Explanation: 2 does not exist in nums so return -1*
 
 # Python
 ```
@@ -27,7 +27,7 @@ def search(self, nums: List[int], target: int) -> int:
 
     # iterate through the pointers
     while l <= r:
-        # calculate the midpoint
+        # calculate the midpoint using floor division
         m = l + ((r - l) // 2)  # (l + r) // 2 can lead to overflow
 
         # if num higher than midpoint change right pointer
@@ -49,4 +49,28 @@ def search(self, nums: List[int], target: int) -> int:
 
 # JavaScript
 ```
+var search = function(nums, target) {
+    // create left and right pointers
+    let left = 0, right = nums.length - 1;
+    
+    // search through the array using the pointers
+    while (left <= right) {
+        // calculate the midpoint
+        const mid = left + Math.floor((right - left) / 2);
+        
+        // if nums higher than the midpoint, update the right pointer
+        // if nums lower than midpoint, update left pointer
+        if (nums[mid] > target) {
+            right = mid - 1;
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else {
+            return mid;
+        }
+    }
+    return -1;
+};
+
+let nums = [-1,0,3,5,9,12], target = 9;
+console.log(search(nums, target));
 ```

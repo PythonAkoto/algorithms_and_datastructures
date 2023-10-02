@@ -61,4 +61,48 @@ class Solution:
 
 # JavaScript
 ```
+/**
+ * @param {number[]} piles
+ * @param {number} h
+ * @return {number}
+ */
+var minEatingSpeed = function(piles, h) {
+    // set left & right pointers
+    let left = 1, right = Math.max(...piles);
+    // set result to highest number (this is only temporary)
+    let result = right;
+    
+    while (left <= right) {
+        // get the value of k 
+        const k = Math.floor((left + right) / 2);
+        let totalTime = 0;
+        
+        // loop through each item in list
+        for (const pile of piles) {
+            // update total time by dividing pile by k
+            // use Math.ceil() to round up to nearest number
+            totalTime += Math.ceil(pile / k);
+        }
+        
+        // binary search
+        
+        // update the result if totalTime is less or equal to hours
+        if (totalTime <= h) {
+            result = k;
+            // update right pointer to search the left side of list
+            right = k - 1;
+        } else {
+            // update left pointer to search the right side of list
+            left = k + 1;
+        }
+        
+    }
+    // return the result after the loop has finished
+    return result;
+    
+};
+
+const piles = [30,11,23,4,20], hours = 5;
+console.log(minEatingSpeed(piles, hours));
+console.log('Yaw Akoto');
 ```

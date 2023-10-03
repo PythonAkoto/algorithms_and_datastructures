@@ -57,4 +57,38 @@ class Solution:
 
 # JavaScript
 ```
+var characterReplacement = function(s, k) {
+    // create hashmap to store letters
+    let hashmap = new Map();
+    // initialise pointers and result
+    let left = 0, maxSubstring = 0;
+    
+    // create right pointer to loop through each letter
+    for (let right = 0; right < s.length; right++) {
+        let maxWindowLength = right - left + 1;
+        
+        // update existing letter in hashmap or add new value
+        // we use the letter of each string as the key and the value
+        // is the count of each letter
+        // if the key is not in the hashmap we add 0 to 1 (1 + 0))
+        hashmap.set(s[right], 1 + (hashmap.get(s[right]) || 0));
+        
+        // check if number of replacements needed is greater than the limit
+        if ((maxWindowLength - Math.max(...hashmap.values())) > k) {
+            // decrement the count of the left pointer letter in hashmap
+            hashmap.set(s[left], hashmap.get(s[left]) - 1);
+            // move the left pointer to next letter
+            left++;
+        }
+        // recalculate the new max window and then the max substring 
+        maxWindowLength = right - left + 1;
+        maxSubstring = Math.max(maxSubstring, maxWindowLength);
+    }
+    // return the result
+    return maxSubstring;
+};
+
+const s = "ABAB", k = 2;
+console.log(characterReplacement(s, k));
+console.log('\nYaw Akoto');
 ```

@@ -63,6 +63,35 @@ class Solution:
         return res
 ```
 
-# JavaScript
+# JavaScript Solution 1
 ```
+var maxProfit = function(prices) {
+    // store profit - start profit at 0
+    let maxProfit = 0;
+    // store lowest price - start @ 1st price in list
+    let lowestPrice = prices[0];
+    
+    // loop through each price in list to see if lower
+    // than price on the first day
+    
+    for (price of prices) {
+        // if current price in list is lower than the lowest price
+        if (price < lowestPrice) {
+            // update lowest price
+            lowestPrice = price;
+        } else {
+            // update the profit by subtracting the
+            // current price from the updated lowest price
+            maxProfit = Math.max(maxProfit, (price - lowestPrice));
+        }
+    }
+    
+    // return the maximum profit
+    return maxProfit;
+    
+};
+console.log('Solution 1:');
+const prices = [7,1,5,3,6,4];
+console.log(maxProfit(prices));
+console.log('\nYaw Akoto');
 ```

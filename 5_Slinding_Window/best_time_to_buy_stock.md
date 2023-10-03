@@ -95,3 +95,35 @@ const prices = [7,1,5,3,6,4];
 console.log(maxProfit(prices));
 console.log('\nYaw Akoto');
 ```
+
+# JavaScript Solution 2
+```
+var maxProfit = function(prices) {
+    // initialise pointers and maximum profit
+    let maxProfit = 0, left = 0, right = 1;
+    
+    // use the right pointer to loop through the prices,
+    // then use the pointers to calculate the current 
+    // profit between each numbers within the loop
+    
+    while (right < prices.length) {
+        if (prices[left] < prices[right]) {
+            let currentProfit = prices[right] - prices[left];
+            // update max profit 
+            maxProfit = Math.max(maxProfit, currentProfit);
+        } else {
+            // update left pointer - left pointer is now @ right pointer position
+            left = right;
+        }
+        // shift the right pointer after each iteration
+        right += 1;
+    }
+    // return the max profit
+    return maxProfit;
+};
+
+console.log('Solution 1:');
+const prices = [7,1,5,3,6,4];
+console.log(maxProfit(prices));
+console.log('\nYaw Akoto');
+```

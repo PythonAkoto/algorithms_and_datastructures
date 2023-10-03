@@ -54,4 +54,36 @@ class Solution:
 
 # JavaScript
 ```
+var lengthOfLongestSubstring = function(s) {
+    // create a set to store each letter from string
+    let charSet = new Set();
+    // create pointers to iterate through each letter
+    let left = 0;
+    // initialise result to 0
+    let numOfLetters = 0;
+    
+    // Use the loop through each letter using the right pointer.
+    // We add each letter to the set, after checking if there's a 
+    // duplicate already in the set.  If it is, we remove the duplicate
+    // from the set.
+    
+    for (let right = 0; right < s.length; right++) {
+        // check if letter is in set
+        while (charSet.has(s[right])) {
+            charSet.delete(s[left]);
+            // move left pointer to next letter
+            left++;
+        }
+        // add each letter to the set using the right pointer
+        charSet.add(s[right]);
+        // update result
+        numOfLetters = Math.max(numOfLetters, charSet.size);
+    }
+    // return result
+    return numOfLetters;
+};
+
+const s = "abcabcbb";
+console.log(lengthOfLongestSubstring(s));
+console.log('\nYaw Akoto');
 ```

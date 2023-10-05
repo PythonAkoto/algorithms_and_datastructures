@@ -44,4 +44,37 @@ class Solution:
 
 # JavaScript
 ```
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+    // check if binary tree is empty
+    if (!root) {
+        return null;
+    }
+
+    // swap the subtrees
+    let temp = root.left;           // create new var to store left val
+    root.left = root.right;         // change left val to right val
+    root.right = temp;              // change right val to left val
+
+    // make recursive calls to keep swapping children
+    invertTree(root.left);
+    invertTree(root.right);
+
+    return root;
+};
+
+const root = [4,2,7,1,3,6,9];
+console.log(invertTree(root));
+console.log('Yaw Akoto');
 ```

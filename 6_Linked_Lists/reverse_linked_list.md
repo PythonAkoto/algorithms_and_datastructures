@@ -37,8 +37,7 @@ class Solution:
         # Traverse the list while there's a node to process (curr is not None)
         while curr:
             # Store the next node in a temporary variable (temp)
-            temp = curr.next
-            # Reverse the link to the previous node
+            temp = curr.next            # Reverse the link to the previous node
             curr.next = prev
             # Move prev and curr one step forward
             prev = curr
@@ -50,4 +49,34 @@ class Solution:
 
 # JavaScript
 ```
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    // create two pointers to loop through the nodes
+    let previousNode = null, currentNode = head;
+    
+    while (currentNode) {
+        let tempNode = currentNode.next;
+        // reverse the link to the previous node
+        currentNode.next = previousNode;
+        // move previousNode & currentNode one step forward
+        previousNode = currentNode;
+        currentNode = tempNode;
+    }
+    
+    return previousNode;
+};
+
+cosnt head = [1, 2];
+console.log(reverseList(head));
+console.log("Yaw Akoto);
 ```

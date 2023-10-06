@@ -54,7 +54,7 @@ class Solution:
         return res
 ```
 
-# JavaScript
+# JavaScript Solution 1 (recursive)
 ```
 /**
  * Definition for a binary tree node.
@@ -76,6 +76,50 @@ var maxDepth = function(root) {
 
     // recursive calls
     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+};
+
+const root = [3,9,20,null,null,15,7];
+console.log(maxDepth(root));
+console.log('Yaw Akoto');
+```
+
+# JavaScript Solution 2 (iterative)
+```
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    // check if root is empty
+    const isBaseCase = root === null;
+    if (isBaseCase) return 0;
+
+    // if not run the iterative function
+    return iterativeDfs([[root, 1]]);
+};
+
+const iterativeDfs = (stack, height = 0) => {
+    // check if there is an entry in the stack
+    while (stack.length) {
+        // remove the node and depth
+        const [root, depth] = stack.pop();
+
+        // calculate the max depth 
+        height = Math.max(height, depth);
+
+        if (root.right) stack.push([root.right, depth + 1]);
+        if (root.left) stack.push([root.left, depth + 1]);
+    }
+
+    return height;
 };
 
 const root = [3,9,20,null,null,15,7];

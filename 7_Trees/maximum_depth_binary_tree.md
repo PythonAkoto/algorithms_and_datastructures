@@ -30,6 +30,30 @@ class Solution:
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 ```
 
+# Python Solution 2 (iterative)
+```
+# ITERATIVE DFS
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        # initialise root with 1st node & its depth of 1
+        stack = [[root, 1]]
+        res = 0
+
+        # while stack is not empty 
+        while stack:
+            # remove node & current depth from stack
+            node, depth = stack.pop()
+
+            # make sure the node is not empty
+            if node:
+                res = max(res, depth)                   # get max result 
+                stack.append([node.left, depth + 1])    # add left children & update depth to stack
+                stack.append([node.right, depth + 1])   # add right children & update depth to stack
+        
+        # return result 
+        return res
+```
+
 # JavaScript
 ```
 /**

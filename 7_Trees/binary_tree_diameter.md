@@ -62,4 +62,47 @@ class Solution:
 
 # JavaScript
 ```
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var diameterOfBinaryTree = function(root) {
+    // create a result variable
+    let result = [0];
+
+    // create function to search through nodes
+    var depthOfSearch = function(root) {
+        // check if root is empty
+        if (!root) {
+            return -1;
+        }
+
+        // find the height of the left & right subtree
+        // using recursive calls
+        let left = depthOfSearch(root.left);
+        let right = depthOfSearch(root.right);
+
+        // find diameter of current root
+        // if the left & right height are greater 
+        // than the result, we update the result
+        result[0] = Math.max(result[0], 2 + left + right);
+
+        // return the height running through the root node
+        return Math.max(left, right) + 1;
+    };
+
+    // call recursive function
+    depthOfSearch(root);
+
+    // return result
+    return result;
+};
 ```

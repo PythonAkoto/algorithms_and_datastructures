@@ -90,4 +90,61 @@ class Trie:
 
 # JavaScript
 ```
+class TrieNode {
+    constructor() {
+        this.children = {};
+        this.isWord = false;
+    }
+}
+
+class Trie {
+    // class constructor to crete a new node at root
+    constructor() {
+        this.root = new TrieNode();
+    }
+
+    /* Time O(N) | Space O(N) */
+    insert(word, node = this.root) {
+        for (const char of word) {
+            // place every character in matching node or new node
+            const child = node.children[char] || new TrieNode();
+
+            // shift the node to next child
+            node.children[char] = child;
+
+            node = child;
+        }
+        // set to true when no more letters to add
+        node.isWord = true;
+    }
+
+    /* Time O(N) | Space O(1) */
+    search(word, node = this.root) {
+        for (const char of word) {
+            const child = node.children[char] || null;
+
+            // if nothing found return false
+            if (!child) return false;
+
+            // go to next node
+            node = child;
+        }
+
+        // evaluate if at end of word - return bool
+        return node.isWord;
+    }
+
+    /* Time O(N) | Space O(1) */
+    startsWith(prefix, node = this.root) {
+        for (const char of prefix) {
+            const child = node.children[char] || null;
+
+            if (!child) return false;
+
+            node = child;
+        }
+
+        return true;
+    }
+}
 ```

@@ -49,4 +49,26 @@ class Solution:
 
 # JavaScript
 ```
+var subsets = (nums) => {
+    nums.sort((a, b) => a - b); // Sort the input array in ascending order
+
+    return dfs(nums); // Call the depth-first search function with the sorted array
+}
+
+var dfs = (nums, level = 0, set = [], subset = []) => {
+    subset.push(set.slice()); // Push a copy of the 'set' array into the 'subset' array
+
+    for (let i = level; i < nums.length; i++) {
+        backTrack(nums, i, set, subset); // Call the backtracking function
+    }
+
+    return subset; // Return the 'subset' array containing all subsets
+}
+
+const backTrack = (nums, i, set, subset) => {
+    set.push(nums[i]); // Add the current number at index 'i' to the 'set' array
+    dfs(nums, (i + 1), set, subset); // Recursively explore subsets with the updated 'set'
+    set.pop(); // Remove the last added element to backtrack
+};
+
 ```

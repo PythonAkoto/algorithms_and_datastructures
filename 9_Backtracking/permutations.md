@@ -24,28 +24,28 @@ Output: `[[1]]`
 ```
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        res = []  # Initialize an empty list to store permutations
+        res = []
 
-        # Base case: If there's only one element in the list, return a list containing that element
+        # base case: return a list containing element if only 1 element in list
         if len(nums) == 1:
-            return [nums[:]]  # nums[:] is a deep copy to avoid modifying the original list
+            return [nums[:]]  # nums[:] is a deep copy
 
-        # Iterate through the elements in the input list
+        # iterate through elements in list
         for i in range(len(nums)):
-            n = nums.pop(0)  # Pop the element at index 0 to consider for the permutation
-
-            # Recursively find permutations for the remaining elements after excluding n
+            # pop element at index 0 for permutation
+            n = nums.pop(0)
+            # find permuations recursively for remaining after excluding n
             perms = self.permute(nums)
 
-            # For each permutation, append n to create a new permutation
+            # for each perm, add n to create new perm
             for perm in perms:
                 perm.append(n)
-
-            # Extend the result list with the new permutations
+            # extend result list with new perm
             res.extend(perms)
-
-            # Restore the original order of nums by appending n back to its original position
-            nums.append(n) 
+            # restore original order of nums by appending n back to its original positoin
+            nums.append(n)
+        return res
+ 
 ```
 
 # JavaScript

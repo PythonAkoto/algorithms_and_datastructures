@@ -61,4 +61,45 @@ class Solution:
 
 # JavaScript
 ```
+/**
+ * Time O(N * log(N)) | Space O(N)
+ * @param {number[]} stones
+ * @return {number}
+ */
+var lastStoneWeight = function (stones) {
+    // Create a max heap to store the stones
+    const maxHeap = getMaxHeap(stones)
+
+    // Shrink the max heap until there is only one stone left
+    shrink(maxHeap)
+
+    // Check if the max heap is not empty
+    return !maxHeap.isEmpty()
+        ? maxHeap.front().element // Return the last stone's weight
+        : 0 // If the heap is empty, return 0
+};
+
+// Function to create a max heap from an array of stones
+const getMaxHeap = (stones, maxHeap = new MaxPriorityQueue()) => {
+    for (const stone of stones) {
+        maxHeap.enqueue(stone) // Add each stone to the max heap
+    }
+
+    return maxHeap // Return the max heap
+}
+
+// Function to repeatedly shrink the max heap by smashing two largest stones
+const shrink = (maxHeap) => {
+    while (1 < maxHeap.size()) {
+        // Dequeue the two largest stones
+        const [ x, y ] = [ maxHeap.dequeue().element, maxHeap.dequeue().element ]
+        
+        // Calculate the difference between the two stones
+        const difference = x - y;
+
+        // Check if the difference is positive (i.e., there's a remaining stone)
+        const isPositive = 0 < difference
+        if (isPositive) maxHeap.enqueue(difference); // Add the remaining stone back to the max heap
+    }
+}
 ```

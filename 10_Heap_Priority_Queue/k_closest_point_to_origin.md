@@ -56,3 +56,36 @@ class Solution:
         
         return res  # Return the list of k closest points
 ```
+
+# JavaScript
+```
+// Define a function kClosest that takes an array of points and an integer k as parameters.
+var kClosest = function (points, k) {
+    // Create a MaxPriorityQueue to store the k closest points.
+    let maxPQ = new MaxPriorityQueue();
+
+    // Iterate through each point in the input array.
+    for (let point of points) {
+        // Calculate the squared distance of the current point from the origin.
+        let dist = squaredDistance(point);
+
+        // If the max priority queue has fewer than k points, add the current point.
+        if (maxPQ.size() < k) {
+            maxPQ.enqueue(point, dist); // Add the point with its distance to the max priority queue.
+        } 
+        // If the max priority queue is full and a closer point is found, replace the farthest point.
+        else if (dist < maxPQ.front().priority) {
+            maxPQ.dequeue(); // Remove the point with the maximum distance.
+            maxPQ.enqueue(point, dist); // Add the current point with its distance.
+        }
+    }
+
+    // Return an array containing all the points stored in the max priority queue.
+    return maxPQ.toArray().map((el) => el.element);
+};
+
+// Function to calculate the squared distance of a point from the origin.
+function squaredDistance(point) {
+    return point[0] * point[0] + point[1] * point[1];
+}
+```

@@ -67,4 +67,40 @@ class Solution:
 
 # JavaScript
 ```
+var maxAreaOfIsland = function(grid, maxArea = 0) {
+    const [ rows, cols ] = [ grid.length, grid[0].length ];
+    const seen = new Array(rows).fill().map(() => new Array(cols));
+
+    for (let row = 0; row < rows; row++) {/* Time O(ROWS) */
+        for (let col = 0; col < cols; col++) {/* Time O(COLS) */
+            const area = getArea(grid, row, rows, col, cols, seen);/* Space O(ROWS * COLS) */
+
+            maxArea = Math.max(maxArea, area);
+        }
+    }
+
+    return maxArea;
+};
+
+var getArea = (grid, row, rows, col, cols, seen) => {
+    const isBaseCase = grid[row][col] === 0;
+    if (isBaseCase) return 0;
+
+    if (seen[row][col]) return 0;
+    seen[row][col] = true;                                          /* Space O(ROWS * COLS) */
+
+    return dfs(grid, row, rows, col, cols, seen) + 1;               /* Space O(ROWS * COLS) */
+}
+
+const dfs = (grid, row, rows, col, cols, seen, area = 0) => {
+    for (const [ _row, _col ] of getNeighbors(row, rows, col, cols)) {
+        area += getArea(grid, _row, rows, _col, cols, seen);
+    }
+
+    return area
+} 
+
+var getNeighbors = (row, rows, col, cols) => [[ 0, 1 ], [ 0, -1 ], [ 1, 0 ], [ -1, 0 ]]
+    .map(([ _row, _col]) => [ (row + _row), (col + _col) ])
+    .filter(([ _row, _col ]) => (0 <= _row) && (_row < rows) && (0 <= _col) && (_col < cols))
 ```

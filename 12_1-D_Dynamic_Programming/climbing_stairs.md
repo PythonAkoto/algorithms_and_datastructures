@@ -47,4 +47,19 @@ class Solution:
 
 # JavaScript
 ```
+var climbStairs = (n) => {
+    const isBaseCase = (n === 1);
+    if (isBaseCase) return 1;
+
+    let [ next, nextNext ] = [ 1, 2 ];
+
+    for (let index = 3; (index <= n); index++) {/* Time O(N) */
+        const temp = (next + nextNext);
+        
+        next = nextNext;
+        nextNext = temp;
+    }
+
+    return nextNext;
+};
 ```

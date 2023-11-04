@@ -44,3 +44,19 @@ class Solution:
         # The minimum cost to reach the top of the stairs will be the minimum between the first and second step.
         return min(cost[0], cost[1])
 ```
+# JavaScript
+```
+ var minCostClimbingStairs = (cost) => {
+    const tabu = new Array(cost.length + 1).fill(0);
+
+    for (let i = 2; i < tabu.length; i++) {
+        const [ prev, prevPrev ] = [ (i - 1), (i - 2) ];
+        const downOne = tabu[prev] + cost[prev];
+        const downTwo = tabu[prevPrev] + cost[prevPrev];
+
+        tabu[i] = Math.min(downOne, downTwo);
+    }
+
+    return tabu[tabu.length - 1];
+}
+```

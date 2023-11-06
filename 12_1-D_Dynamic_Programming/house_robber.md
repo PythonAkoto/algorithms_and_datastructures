@@ -47,3 +47,22 @@ class Solution:
         # Return the maximum amount we can rob after iterating through all the houses
         return rob2
 ```
+
+# JavaScript
+```
+var rob = (nums) => {
+    if (!nums.length) return 0;
+
+    let [ left, mid ] = [ 0, 0 ];
+
+    for (const right of nums) {/* Time O(N) */
+        const temp = mid;
+        const house = left + right;
+
+        mid = Math.max(mid, house);
+        left = temp;
+    }
+
+    return mid;
+};
+```

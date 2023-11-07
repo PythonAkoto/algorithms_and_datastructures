@@ -55,3 +55,42 @@ class Solution:
         # Return the list of merged intervals.
         return res
 ```
+
+# JavaScript 
+```
+function insert(intervals, newInterval) {
+    // Initialize an empty array to store the resulting merged intervals.
+    const res = [];
+
+    // Iterate through each interval in the input 'intervals' array.
+    for (let i = 0; i < intervals.length; i++) {
+        // If the end of 'newInterval' is less than the start of the current interval,
+        // it means 'newInterval' should be inserted before the current interval.
+        if (newInterval[1] < intervals[i][0]) {
+            res.push(newInterval);  // Add 'newInterval' to the result.
+            return res.concat(intervals.slice(i));  // Return the result plus the remaining intervals.
+        }
+
+        // If the start of 'newInterval' is greater than the end of the current interval,
+        // it means the current interval should be added to the result as it is.
+        else if (newInterval[0] > intervals[i][1]) {
+            res.push(intervals[i]);  // Add the current interval to the result.
+        }
+
+        // If there is an overlap between 'newInterval' and the current interval,
+        // merge the two intervals by updating the 'newInterval'.
+        else {
+            newInterval = [
+                Math.min(newInterval[0], intervals[i][0]),  // Update the start of 'newInterval'.
+                Math.max(newInterval[1], intervals[i][1])   // Update the end of 'newInterval'.
+            ];
+        }
+    }
+
+    // After looping through all intervals, add the final 'newInterval' to the result.
+    res.push(newInterval);
+
+    // Return the array of merged intervals.
+    return res;
+}
+```

@@ -21,4 +21,37 @@ Output: `[[1,2],[3,10],[12,16]]`
 
 # Python
 ```
+class Solution:
+    def insert(
+        self, intervals: List[List[int]], newInterval: List[int]
+    ) -> List[List[int]]:
+        # Initialize an empty list to store the resulting merged intervals.
+        res = []
+
+        # Iterate through each interval in the input 'intervals' list.
+        for i in range(len(intervals)):
+            # If the end of the 'newInterval' is less than the start of the current interval,
+            # it means 'newInterval' should be inserted before the current interval.
+            if newInterval[1] < intervals[i][0]:
+                res.append(newInterval)  # Add 'newInterval' to the result.
+                return res + intervals[i:]  # Return the result plus the remaining intervals.
+
+            # If the start of 'newInterval' is greater than the end of the current interval,
+            # it means the current interval should be added to the result as it is.
+            elif newInterval[0] > intervals[i][1]:
+                res.append(intervals[i])  # Add the current interval to the result.
+
+            # If there is an overlap between 'newInterval' and the current interval,
+            # merge the two intervals by updating the 'newInterval'.
+            else:
+                newInterval = [
+                    min(newInterval[0], intervals[i][0]),  # Update the start of 'newInterval'.
+                    max(newInterval[1], intervals[i][1]),  # Update the end of 'newInterval'.
+                ]
+
+        # After looping through all intervals, add the final 'newInterval' to the result.
+        res.append(newInterval)
+
+        # Return the list of merged intervals.
+        return res
 ```

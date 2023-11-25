@@ -47,4 +47,55 @@ class Solution:
 
 # JavaScript
 ```
+// Function to group anagrams in an array of words
+var groupAnagrams = (words, map = new Map()) => {
+    // Check if the input array is empty
+    if (!words.length) return [];
+
+    // Group the words into anagrams using a helper function
+    groupWords(words, map); /* Time O(N * K) | Space O(N * K) */
+
+    // Return the grouped anagrams as an array of arrays
+    return [ ...map.values() ]; /* Time O(N) | Space O(N * K) */
+}
+
+// Helper function to group words into anagrams using a map
+var groupWords = (words, map) => {
+    // Iterate through each original word in the array
+    for (const original of words) { /* Time O(N) */
+        // Get a hash for the original word based on character frequency
+        const hash = getHash(original); /* Time O(K) | Space O(1) */
+        
+        // Retrieve the values (anagrams) corresponding to the hash from the map
+        const values = map.get(hash) || [];
+
+        // Add the original word to the list of anagrams
+        values.push(original); /* Space O(N) */
+
+        // Update the map with the hash and the updated list of anagrams
+        map.set(hash, values); /* Space O(N * K) */
+    }
+}
+
+// Function to calculate a hash for a word based on character frequency
+const getHash = (word) => {
+    // Initialize an array to store the frequency of each character in the word
+    const frequency = new Array(26).fill(0);
+
+    // Iterate through each character in the word
+    for (const char of word) { /* Time O(K) */
+        // Get the character code and update the frequency array
+        const charCode = getCode(char); /* Time O(1) | Space O(1) */
+        frequency[charCode]++; /* Space O(1) */
+    }
+
+    // Build a hash from the frequency array
+    return buildHash(frequency);
+}
+
+// Function to get the character code (0 to 25) for a lowercase letter
+const getCode = (char) => char.charCodeAt(0) - 'a'.charCodeAt(0);
+
+// Function to build a hash from a frequency array
+const buildHash = (frequency) => frequency.toString();
 ```
